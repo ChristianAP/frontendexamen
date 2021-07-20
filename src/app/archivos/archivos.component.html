@@ -1,0 +1,69 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<body id="contenido" style="margin-top:20px">
+<label for="" id="archivostitle">ARCHIVOS</label>
+<br>
+  <button class="btn btn-success" style="float: right;" type="button" data-bs-toggle="modal" data-bs-target="#archivo">AGREGAR ARCHIVO</button>
+<br>
+<br>
+  <table class="table table-striped table-hover" id="tabla-idioma" style="text-align: center;">
+    <thead>
+        <tr style="text-align: center">
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grati of listarArchivos let f=index" >
+            <th scope="row">{{f+1}}</th>
+            <td>{{grati.nombre}}</td>
+            <td>{{grati.tipo}}</td>
+            <td id="tdxd">
+              <i  id="eliminar" class="fas fa-trash-alt" style="color: rgb(248, 215, 28); margin-right: 5px;" (click)="eliminar(grati)"></i>
+              <i class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#VisualizarDoc" (click)="loadArchi(grati)"></i>
+            </td>
+        </tr>
+      </tbody>
+  </table> 
+</body>
+
+  <div class="modal fade" id="archivo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">AGREGAR ARCHIVO</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="pdffFile" width="100" height="120" style="cursor: pointer; float: right;">
+                <i class="fa fa-plus" style="font-size: 24px;border: 1px solid black;padding: 25px;cursor: pointer;"></i>
+        </label>
+            <input (change)="capturar($event)" type="file" name="pdffFile" id="pdffFile" style="visibility: none; display:none">  
+            <embed id="vistaPrevia" type="application/pdf" width="400" height="400" style="margin: auto">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="subirArchivos()" data-bs-dismiss="modal" style="background-color: #9c254d;" >GUARDAR CAMBIOS</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal PREVISUALIZAR IDIOMA -->
+  <div class="modal fade" id="VisualizarDoc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content" >
+        <div class="modal-header" >
+          <h5 class="modal-title" id="exampleModalLabel">ARCHIVO SELECCIONADO</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngFor="let pru of listarIDArchivos" style="text-align: center" width="400" height="400" style="object-fit: cover">
+            <embed id="vistaPrevia" type="application/pdf" width="400" height="400"  [src]="transform(this.listarIDArchivos[0].url) " toolbar=0 >
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,53 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<body id="contenido" style="margin-top:20px">
+  <label for="" id="archivostitle">CORREO</label>
+<br>
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float:right">
+    NUEVO MENSAJE
+  </button>
+  <br>
+  <br>
+<table class="table table-striped table-hover" id="tabla-idioma" style="text-align: center;">
+    <thead>
+        <tr style="text-align: center">
+          <th scope="col">#</th>
+          <th scope="col">Destino</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grati of listarCorreo let f=index" >
+            <th scope="row">{{f+1}}</th>
+            <td>{{grati.destinatario}}</td>
+            <td>{{grati.titulo}}</td>
+            <td>{{grati.fecha| date:'yyyy-MM-dd'}}</td>
+        </tr>
+      </tbody>
+  </table> 
+</body>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">NUEVO MENSAJE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <label for="" id="labels">DESTINATARIO: </label>
+          <input type="" class="form-control" id="input" [(ngModel)]="correo.destinatario" placeholder="Ingrese el correo de destino">
+          <label for="" id="labels">TÍTULO: </label>
+          <input type=""  class="form-control" id="input2" [(ngModel)]="correo.titulo" placeholder= "Ingrese titulo del mensaje">
+          <label for="" id="labels">MENSAJE: </label>
+          <textarea class="form-control"  id="input3" [(ngModel)]="correo.mensaje"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="crearEmail()" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
